@@ -43,7 +43,7 @@
 <body>
     <div class="header">
         <h1>Group 4 Data 1</h1>
-        <h2>Assignment 3</h2>
+        <h2>Assignment 3: Housing</h2>
     </div>
     
     <!-- Navigation Bar -->
@@ -54,6 +54,191 @@
         <a href="assignment3.html">Assignment 3</a>
         <a href="assignment4.html">Assignment 4</a>
     </div>
+
+    <h3>Instructions Assignment 3</h3>
+    <p>For this exercise you need the data from this website. Download the Basis Bestand Gebieden
+        Amsterdam (BBGA), both the data and the documentation. You already have the AirBnB data
+        from Amsterdam from the workshop exercise.</p>
+   <p>The Municipality of Amsterdam is in a love hate relationship with AirBnb, see for example this
+    and this article. Amsterdam wants to get a bit of insight in the number of tourists that will
+    make use of AirBnB. Can you advise on or calculate for Amsterdam:</p>
+
+<h2>Question 1: What Amsterdam will receive from tourist tax if the event lasts a week and you will have 30.000 visitors?</h2>
+<p>If there are 30.000 visitors that will visit for a week. The Tourist tax depends on which type of overnight stay they choose. Either hotels or an AirBnB. The tourist tax for staying in a hotel in Amsterdam is 7% per night per hotel room. Also, each individual needs to pay &euro;3 per night. An average hotelroom per night is &euro;125 in the Netherlands. This leads to the following calculation:&nbsp;</p>
+
+<ul>
+	<li>
+	<p>7&nbsp; x &euro;125 = &euro;875 for seven nights in a hotelroom&nbsp;</p>
+	</li>
+	<li>
+	<p>&euro;875 x 0,07 = &euro;61,25 turnover rate for seven nights in a hotelroom&nbsp;</p>
+	</li>
+</ul>
+
+<ul>
+	<li>
+	<p>7 x &euro;3 = &euro;21 tax per day per person&nbsp;</p>
+	</li>
+</ul>
+
+<p>In sum:&nbsp;</p>
+
+<ul>
+	<li>
+	<p>&euro;61,25 + &euro;21 = &euro;82,25&nbsp;</p>
+	</li>
+	<li>
+	<p>30.000 x &euro;82,25 = &euro;2.467.500 tourist tax for 30.000 visitors staying in a hotel for seven days&nbsp;</p>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>If we would calculate the same for visitors staying in a AirBnB. The following goes that the tourist tax is 10% per AirBnB. Using the csv listings AirBnB in Amsterdam file, we&#39;ve calculated that the average price per AirBnB is &euro;254,53. This leads to the following calculation:&nbsp;</p>
+
+<ul>
+	<li>
+	<p>7 x &euro;254,53 = &euro;1.781,71 for seven nights in a AirBnB&nbsp;</p>
+	</li>
+	<li>
+	<p>&euro;1.781,71 x 0,10 = &euro;178,17 turnover rate for seven nights in a AirBnB&nbsp;</p>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>In sum:&nbsp;</p>
+
+<ul>
+	<li>
+	<p>30.000 x &euro;178,17 = &euro;5.345.130 tourist tax for 30.000 visitors staying in a AirBnB for seven days&nbsp;&nbsp;</p>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+
+<p>In conclusion, the tourist tax for staying in a AirBnB is much higher than staying in a hotel. Nevertheless, Airbnb&#39;s consist mostly of multiple bedrooms where multiple individuals can stay in. The calculation is based on each visitor staying in a Airbnb separately. When it could be friends or families staying with more than one in an Airbnb. So, the calculation is not totally representative.&nbsp;&nbsp;</p>
+<h2>Question 2: Plot the amount of AirBnB locations per neighbourhood.</h2>
+<p>This question is answered using Python. The code you can find below:&nbsp;</p>
+
+<pre>
+<code class="language-python">pip install pandas
+pip install matplotlib
+import pandas as pd
+import matplotlib.pyplot as plt
+
+data = pd.read_csv("df_bnb.csv", encoding="utf-8", sep = ";")
+data['neighbourhood'] = data['neighbourhood'].str.strip('"')
+
+# Clean and convert the "latitude" and "longitude" columns to numeric values to plot
+data['latitude'] = data['latitude'].str.replace('.', '').astype(float) / 1000
+data['longitude'] = data['longitude'].str.replace('.', '').astype(float) / 1000
+
+# Group the data by neighborhood and count the number of Airbnb locations
+neighborhood_counts = data['neighbourhood'].value_counts().reset_index()
+neighborhood_counts.columns = ['Neighborhood', 'Counts']
+
+# Create a plot to visualize the data
+plt.figure(figsize=(12, 6))
+plt.bar(neighborhood_counts["Neighborhood"], neighborhood_counts["Counts"])
+plt.xlabel("Neighborhood")
+plt.ylabel("Number of Airbnb Locations")
+plt.title("Airbnb Locations per Neighborhood in the Netherlands")
+plt.xticks(rotation=90)
+plt.tight_layout()
+plt.show()</code></pre>
+
+<p>When plotting this code you will recieve the next plot:</p>
+<p>Hence, the neighbourhood "De Baarsjes - Oud-West" consists of the most AirBnB locations.</p>
+<h2>Question 3: Which street in Amsterdam has the most AirBnB apartments?</h2>
+<p>This question is divided in two parts. First we located the adresses of all the ID's in the csv file of the neighbourhood "De Baarsjes - Oud-West". Then the adresses were added to the dataframe in a new column</p>
+<pre>
+    <code class="language-python">#First install and import packages
+    pip install geopy
+    from geopy.geocoders import Nominatim
+    
+    #import data from csv file
+    bnb = pd.read_csv('bnb.csv')
+    location = bnb.groupby(['latitude', 'longitude']).size().reset_index(name='count') 
+    
+    # Create a Nominatim geocoder instance
+    geolocator = Nominatim(user_agent="airbnb")
+    
+    # Specify the specific neighborhood (referring back to the answer of question 2)
+    specific_neighborhood = "De Baarsjes - Oud-West"
+    
+    # Create a list to store the results
+    addresses = []
+    
+    # Define batch size (this is, because we recieved errors of Nominatim being maxed out. So we calculated in batches)
+    batch_size = 100  # You can adjust this based on the service's rate limits
+    
+    # Filter the DataFrame to include only the specific neighborhood
+    filtered_data = bnb[bnb['neighbourhood'] == specific_neighborhood]
+    
+    # Iterate through the filtered DataFrame in batches and perform reverse geocoding
+    for start_idx in range(0, len(filtered_data), batch_size):
+        end_idx = start_idx + batch_size
+        batch_data = filtered_data.iloc[start_idx:end_idx]  # Get a batch of data
+    
+        batch_addresses = []  # List to store addresses for this batch
+    
+        for index, row in batch_data.iterrows():
+            lat = row['latitude']
+            lon = row['longitude']
+            location = geolocator.reverse((lat, lon), exactly_one=True)
+            address = location.address if location else "N/A"  # Handle if the location is not found
+            batch_addresses.append(address)
+    
+        # Add the addresses to the main 'addresses' list
+        addresses += batch_addresses
+    
+    # Add the addresses to the filtered DataFrame
+    filtered_data['address'] = addresses
+    
+    # Print the updated DataFrame
+    print(filtered_data)
+    
+    </code></pre>
+    
+    <p>&nbsp;</p>
+
+<p>Now that we have the street adresses of the neighbourhood "De Baarsjes - Oud-West", we can calculate which street has the most AirBnBs.</p>
+<pre>
+    <code class="language-python"># Use the 'address' column of your filtered_data DataFrame
+    addresses = filtered_data['address']
+    
+    # Extract the street names from the addresses
+    street_names = addresses.str.extract(r'(.*?),').iloc[:, 0]
+    
+    # Calculate the most common street
+    most_common_street = street_names.value_counts().idxmax()
+    
+    # Get the count of occurrences for the most common street
+    most_common_count = street_names.value_counts().max()
+    
+    # Print the most common street and its count
+    print(f"The most common street is '{most_common_street}' with {most_common_count} occurrences.")</code></pre>
+    
+    <p>&nbsp;</p>
+<p>When running this code, you will recieve the answer with the street containing the most AirBnBs: Nassaukade. Which contains 14 AirBnBs.</p>
+<h2>Question 4: Try to cross reference the data from the AirBnB dataset with the BBGA. Can you figure
+    out if all apartments of AirBnB are designated as housing? Which number of
+    apartments are not rented out all the time but are also used as normal housing?</h2>
+<p>Looking at the BBGA csv and looking back at the question we have concluded that the data in the BBGA file can not be cross referenced with the AirBnB data. There is no data in common with both datasets to cross reference and answer this question.</p>
+<h2>Question 5: How many hotel rooms should be built if Amsterdam wants to accommodate the same
+    number of tourists?</h2>
+<p>30.000 visitors are coming to Amsterdam for a week. Based off the website of the Municipali
+    ty of Amsterdam there are 536 Hotels with a total of 40.583 hotel rooms (Gemeente Amsterdam, 2021). 
+    Therefore, there are enough hotel rooms to accommodate the number of tourists visiting Amsterdam for the swimming event.</p>  
+
+  
+
+    <p>The conclusion made above is based on the Municipality of Amsterdam website. Here you see a graph made 
+        of the statistics. As you can see the number of hotels and hotel rooms has increased compared to 2011.
+         With this information we can assume that the number of hotels and hotel rooms also increased and not decreased in the last 
+         2 years. Hence, there is enough to accommodate 30.000 visitors.</p>
+<h2>Question 6: How many different licenses are issued?</h2>
 <a href="index.html#home">Home</a>
 <a href="assignment2.html#home">Back</a>
 <a href="assignment4.html#home">Next</a>
