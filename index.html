@@ -1,58 +1,154 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8"
+    <title>Home Page</title>
     <style>
-        /* Define your inline CSS for Material Design styling here */
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
         }
-        .header {
-            background-color: #2196F3;
-            color: #fff;
-            padding: 20px;
-        }
         .container {
+            margin: 0 auto;
+            max-width: 800px;
             padding: 20px;
         }
-        .assignment-link {
-            color: #2196F3;
-            text-decoration: none;
-        }
-        .assignment-link:hover {
-            text-decoration: underline;
-        }
-        .nav {
-            background-color: #2196F3;
-            overflow: hidden;
-        }
-        .nav a {
-            float: left;
-            display: block;
+        header {
+            background-color: #6200EE;
             color: white;
-            text-align: center;
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        nav a {
+            color: white;
             padding: 14px 16px;
             text-decoration: none;
+            transition: background-color 0.3s, color 0.3s;
         }
-        .nav a:hover {
-            background-color: #1976D2;
+        nav a:hover {
+            background-color: #3700B3;
+            color: #BB86FC;
+        }
+        nav a.active {
+            background-color: #BB86FC;
+            color: #3700B3;
+            pointer-events: none;
+        }
+        footer {
+            background-color: #EDE7F6; /* Lighter shade of purple for the footer */
+            padding: 20px 0;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+        }
+        .personal-info {
+            text-align: left;
+        }
+        .personal-info p {
+            margin: 5px 0; /* Reduce vertical spacing */
+            color: #6200EE; /* Primary color for text */
+        }
+        .sub-navigation {
+            text-align: right;
+        }
+        .sub-navigation a {
+            text-decoration: none;
+            color: #6200EE;
+            background-color: white;
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 5px;
+            border: 2px solid #6200EE;
+            transition: all 0.3s;
+        }
+        .sub-navigation a:hover {
+            background-color: #D1C4E9;
+            color: white;
+        }
+        .introduction {
+            margin-bottom: 20px;
+            text-align: left; /* Center the content */
+        }
+        .introduction h2 {
+            background-color: #6200EE; /* Dark purple background */
+            color: white; /* White text */
+            padding: 10px;
+            border-radius: 5px; /* Rounded corners */
+            display: inline-block;
+            margin-bottom: 15px; /* Space between the header and text */
+        }
+        .introduction p {
+            font-size: 1.1em; /* Slightly larger font size */
+            color: #333; /* Dark text color for contrast */
+        }
+
+        /* Styles for image with text block */
+        .image-text-block {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .image-text-block img {
+            border-radius: 10px; /* Rounded corners */
+            margin-right: 20px;
+            width: 150px; /* Fixed width */
+            height: auto; /* Maintain aspect ratio */
+        }
+        .image-text-block .text {
+            flex-grow: 1;
+        }
+
+        /* Styles for lists */
+        ul.styled-list {
+            list-style-type: none; /* Remove default bullets */
+            padding: 0;
+            margin-bottom: 20px;
+        }
+        ul.styled-list li {
+            background-color: #D1C4E9; /* Lighter purple */
+            margin: 5px 0;
+            padding: 10px;
+            border-radius: 5px; /* Rounded corners */
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Group 4 Data 1</h1>
-    </div>
-    
-    <!-- Navigation Bar -->
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="assignment1.html">Assignment 1</a>
-        <a href="assignment2.html">Assignment 2</a>
-        <a href="assignment3.html">Assignment 3</a>
-        <a href="assignment4.html">Assignment 4</a>
-    </div>
+    <header>
+        <div class="header-content">
+            <h1>Home</h1>
+            <nav>
+                <a href="index.html" class="active">Home</a><!-- class="active" moet op de pagina staan waar je op zit -->
+                <a href="assignment1.html">Assignment 1</a>
+                <a href="assignment2.html">Assignment 2</a>
+                <a href="assignment3.html">Assignment 3</a>
+                <a href="assignment4.html">Assignment 4</a>
+            </nav>
+        </div>
+    </header>
 
 
 <div class="container">
@@ -60,8 +156,16 @@
     <p>This is the home page of our website for Data 1. We are Thijmen, Rafaël and Filine and together we worked on the project for Data 1. Here on the main page you can find the instructions of the project. Hope you enjoy!</p>
     <h3>Info about the Project</h3>
     <p>Paris is hosting the Paralympics in 2024. One of the events at the Paralympics is an open water swimming event in the Seine (apparently the water is clean or so the French say). Since the City of Amsterdam thinks it is better than Paris, they want to host an event before the Paralympics, snubbing the Parisians. The idea is to host a 5km. open water swimming event through the canals of Amsterdam. You are asked by the municipality of Amsterdam to advise on the feasibility of the event from the perspective of the safety of the partaking athletes from an environmental perspective. The event is going to be hosted in May.</p>
-    <a class="assignment1.html" href="assignment1.html">View Assignment 1</a>
-    <a class="assignment2.html" href="assignment2.html">View Assignment 2</a>
-    <a class="assignment3.html" href="assignment3.html">View Assignment 3</a>
-    <a class="assignment4.html" href="assignment4.html">View Assignment 4</a>
 </div>
+
+<footer>
+    <div class="footer-content">
+        <div class="personal-info">
+            <p>Amsterdam Paralympic Swimming Event</p>
+        </div>
+        <div class="sub-navigation">
+            <a href="assignment1.html">First Assignment</a>
+        </div>
+    </div>
+</footer>
+</body>
