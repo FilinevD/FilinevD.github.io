@@ -1,59 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <title>Assignment 2</title>
     <style>
-        /* Define your inline CSS for Material Design styling here */
-        body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #2196F3;
-            color: #fff;
-            padding: 20px;
-        }
-        .container {
-            padding: 20px;
-        }
-        .assignment-link {
-            color: #2196F3;
-            text-decoration: none;
-        }
-        .assignment-link:hover {
-            text-decoration: underline;
-        }
-        .nav {
-            background-color: #2196F3;
-            overflow: hidden;
-        }
-        .nav a {
-            float: left;
-            display: block;
-            color: white;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-        }
-        .nav a:hover {
-            background-color: #1976D2;
-        }
+      body {
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        margin: 0 auto;
+        max-width: 800px;
+        padding: 20px;
+      }
+      header {
+        background-color: #6200EE;
+        color: white;
+        padding: 10px 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+      .header-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      header h1 {
+        margin: 0;
+      }
+      nav a {
+        color: white;
+        padding: 14px 16px;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s;
+      }
+      nav a:hover {
+        background-color: #3700B3;
+        color: #BB86FC;
+      }
+      nav a.active {
+        background-color: #BB86FC;
+        color: #3700B3;
+        pointer-events: none;
+      }
+  
+      .introduction {
+        margin-bottom: 20px;
+        text-align: left; /* Center the content */
+      }
+      .introduction h2 {
+        background-color: #6200EE; /* Dark purple background */
+        color: white; /* White text */
+        padding: 10px;
+        border-radius: 5px; /* Rounded corners */
+        display: inline-block;
+        margin-bottom: 15px; /* Space between the header and text */
+      }
+      .introduction p {
+        font-size: 1.1em; /* Slightly larger font size */
+        color: #333; /* Dark text color for contrast */
+      }
+  
+      /* Styles for image with text block */
+      .image-text-block {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+        text-align: left;
+      }
+      .image-text-block img {
+        border-radius: 10px; /* Rounded corners */
+        margin-right: 20px;
+        width: 150px; /* Fixed width */
+        height: auto; /* Maintain aspect ratio */
+      }
+      .image-text-block .text {
+        flex-grow: 1;
+      }
+  
+      /* Styles for lists */
+      ul.styled-list {
+        list-style-type: none; /* Remove default bullets */
+        padding: 0;
+        margin-bottom: 20px;
+      }
+      ul.styled-list li {
+        background-color: #D1C4E9; /* Lighter purple */
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 5px; /* Rounded corners */
+      }
+      footer {
+        background-color: #EDE7F6; /* Lighter shade of purple for the footer */
+        padding: 20px 0;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap; /* Allow content to wrap on smaller screens */
+      }
+      .personal-info {
+        text-align: left;
+      }
+      .personal-info p {
+        margin: 5px 0; /* Reduce vertical spacing */
+        color: #6200EE; /* Primary color for text */
+      }
+      .sub-navigation {
+        text-align: right;
+      }
+      .sub-navigation a {
+        text-decoration: none;
+        color: #6200EE;
+        background-color: white;
+        padding: 10px 20px;
+        margin: 0 5px;
+        border-radius: 5px;
+        border: 2px solid #6200EE;
+        transition: all 0.3s;
+      }
+      .sub-navigation a:hover {
+        background-color: #D1C4E9;
+        color: white;
+      }
     </style>
 </head>
 <body>
-    <div class="header">
-        <h1>Group 4 Data 1</h1>
-        <h2>Assignment 2L Tourboats</h2>
-    </div>
-    
-    <!-- Navigation Bar -->
-    <div class="nav">
-        <a href="index.html">Home</a>
-        <a href="assignment1.html">Assignment 1</a>
-        <a href="assignment2.html">Assignment 2</a>
-        <a href="assignment3.html">Assignment 3</a>
-        <a href="assignment4.html">Assignment 4</a>
-    </div>
+    <header>
+        <div class="header-content">
+          <h1>Assignment 2</h1>
+          <nav>
+            <a href="index.html">Home</a>
+            <a href="assignment1.html">Assignment 1</a>
+            <a href="assignment2.html" class = "active">Assignment 2</a>
+            <a href="assignment3.html">Assignment 3</a>
+            <a href="assignment4.html">Assignment 4</a>
+          </nav>
+        </div>
+      </header>
+
 <div class="container">
 <h3>Instructions Assignment 2</h3>
 <p>The Municipality is worried that the canal- and support boats might pollute the air with their
@@ -75,14 +172,18 @@
 <h4>Question 8: Would their be any effect on the water quality if there are less/no canal boats using fossil fuels?</h4>
 
 <h3>References</h3>
-
-<a href="index.html#home">Home</a>
-<a href="assignment1.html#home">Back</a>
-<a href="assignment3.html#home">Next</a>
-
 </div>
+<footer>
+    <div class="footer-content">
+      <div class="personal-info">
+        <p>Amsterdam Paralympic Swimming Event</p>
+      </div>
+      <div class="sub-navigation">
+        <a href="assignment1.html">Previous Assignment</a>
+        <a href="assignment3.html">Next Assignment</a>
+        <a href="index.html">Back Home</a>
+      </div>
+    </div>
+  </footer>
 </body>
-<div class="footer">
-    <h4>Amsterdam Paralympics Event</h4>
-  </div>
 </html>
