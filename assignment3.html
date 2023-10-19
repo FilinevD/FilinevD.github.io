@@ -295,6 +295,14 @@ plt.show()</code></pre>
          2 years. Hence, there is enough to accommodate 30.000 visitors.</p>
 <h4>Question 6: How many different licenses are issued?</h4>
 
+<div class="language-python highlighter-rouge">
+    <div class="highlight">
+        <pre class="highlight">
+            <code>license = list(set(bnb["license"])) 
+                print("The number of licences after removing duplicates:" + str(len(license)))
+    </code></pre></div></div>
+    <p>Running this codes will get you the answer 7288 licenses issued.</p>
+
 <h3>References</h3>
 <ul>
 	<li><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Boer, J. de. (2022, september 13). <em>Prijzen Nederlandse hotelkamers stijgen dit jaar zeer fors, maar bezetting is nog niet op pre-corona niveau</em>. Business Insider Nederland. https://www.businessinsider.nl/prijzen-nederlandse-hotelkamers-2022-125-euro/</span></span></li>
