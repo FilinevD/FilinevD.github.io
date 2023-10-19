@@ -215,7 +215,7 @@ plt.tight_layout()
 plt.show()</code></pre>
 
 <p>When plotting this code you will recieve the next plot:</p>
-<img src="de baarsjes.png" alt="uitkomst de baarsjes" width="800" height="600">
+<img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\de baarsjes.png" alt="uitkomst de baarsjes" width="800" height="600">
 <p>Hence, the neighbourhood "De Baarsjes - Oud-West" consists of the most AirBnB locations.</p>
 <h4>Question 3: Which street in Amsterdam has the most AirBnB apartments?</h4>
 <p>This question is divided in two parts. First we located the adresses of all the ID's in the csv file of the neighbourhood "De Baarsjes - Oud-West". Then the adresses were added to the dataframe in a new column</p>
@@ -272,7 +272,8 @@ plt.show()</code></pre>
 
 <p>Now that we have the street adresses of the neighbourhood "De Baarsjes - Oud-West", we can calculate which street has the most AirBnBs.</p>
 <pre>
-    <code class="language-python"># Use the 'address' column of your filtered_data DataFrame
+    <code class="language-python">
+    # Use the 'address' column of your filtered_data DataFrame
     addresses = filtered_data['address']
     
     # Extract the street names from the addresses
@@ -299,8 +300,8 @@ plt.show()</code></pre>
     ty of Amsterdam there are 536 Hotels with a total of 40.583 hotel rooms (Gemeente Amsterdam, 2021). 
     Therefore, there are enough hotel rooms to accommodate the number of tourists visiting Amsterdam for the swimming event.</p>  
 
-    <img src="2011.png" alt="2011 hotelkamers" width="500" height="600">
-    <img src="2021.png" alt="2021 hotelkamers" width="500" height="600">
+    <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2011.png" alt="2011 hotelkamers" width="500" height="600">
+    <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2021.png" alt="2021 hotelkamers" width="500" height="600">
 
     <p>The conclusion made above is based on the Municipality of Amsterdam website. Here you see a graph made 
         of the statistics. As you can see the number of hotels and hotel rooms has increased compared to 2011.
@@ -308,12 +309,12 @@ plt.show()</code></pre>
          2 years. Hence, there is enough to accommodate 30.000 visitors.</p>
 <h4>Question 6: How many different licenses are issued?</h4>
 
-<div class="language-python highlighter-rouge">
-    <div class="highlight">
-        <pre class="highlight">
-            <code>license = list(set(bnb["license"])) 
-                print("The number of licences after removing duplicates:" + str(len(license)))
-    </code></pre></div></div>
+<pre>
+  <code class="language-python">
+    license = list(set(bnb["license"])) 
+    print("The number of licences after removing duplicates:" + str(len(license)))
+    </code></pre>
+    <p>&nbsp;</p>
     <p>Running this codes will get you the answer 7288 licenses issued.</p>
 
 <h3>References</h3>
