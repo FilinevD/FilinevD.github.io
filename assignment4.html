@@ -261,7 +261,7 @@
     print('the closeness centrality of the start node is', closeness_centrality(nodes_start))
     print('the closeness centrality of the finish node is', closeness_centrality(nodes_finish))</code></pre>
 
-<p>When running this code, you will recieve the answers:
+<p>When running this code, you will recieve the answers:</p>
   <pre>
     <code class = "language-python">
     the closeness centrality of the centre node is 0.02730357697455819
@@ -269,11 +269,47 @@
     the closeness centrality of the finish node is 0.024650822273494452
     </code>
   </pre>
-</p>
-<h4>Question 6: Find all cafes, restaurants near the finish line. Walking time smaller than 10 minutes.</h4>
 
+<h4>Question 6: Find all cafes, restaurants near the finish line. Walking time smaller than 10 minutes.</h4>
+<p> To find all cafes, restaurants near the finish line within 10 minutes we need to use the longitude and latitude of the finish line. 
+  Within a 10 minute walk you can reach a disance of 800 meters (Merriam et al., 2017). The longitude used is 52.37225 and the latitude is 4.91797. 
+  The right feature to add to find all cafes and restaurant is the amenity feature of OSM. Specifically "cafe" and "restaurant" that falls under the amenity feature.
+  With this there is enough information to build a code:</p> 
+  <pre>
+    <code class = "language-python">
+    import osmnx as ox
+
+    # Specify the latitude and longitude
+    latitude = 52.37225
+    longitude = 4.91797
+
+    # Define the place name and tags
+    place = {"city": "Amsterdam", "country": "Netherlands"}
+    tags = {"amenity":["restaurant","cafe"]}
+
+    # Fetch amenity feature within 800 meters of the finish line 
+    gdf = ox.geometries_from_point((latitude, longitude), tags=tags, dist=800)
+
+    # Plot the building footprints
+    fig, ax = ox.plot_footprints(gdf, figsize=(3, 3))
+
+# Display the plot
+plt.show()
+    </code>
+  </pre>
+
+<p>When running this code we recieve this plot:</p>
+<div class = "items">
+  <figure>
+  <img src= ".\PNGs\output.png" alt="tramline 7" width="400" height="300">
+    <figcaption> Figure 5: Plot of all the cafes and restaurants within a 10 minute walk from the finish line</figcaption>
+  </figure>
+</div>
+
+<p>Not a lot of amenities for the participants and visitors. Maybe we could advice them to rent a bike and give out a map of amenities in the neighbourhood.</p>
 <h3>References:</h3>
 <ul>
+  <li><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Merriam, D., Bality, A., Stein, J., &amp; Boehmer, T. (2017). <em>Improving Public Health through Public Parks and Trails: Eight Common Measures.</em> [Summary report]. https://web.archive.org/web/20171007013115/https://npgallery.nps.gov/RTCA/GetAsset/f09e69fc-2696-45e8-b4d5-90e4cea5e689</span></span></li>
   <li><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Over.GVB.nl. (z.d.-b). <em>Onze trams</em>. Geraadpleegd 18 oktober 2023, van https://over.gvb.nl/ov-in-amsterdam/voer-en-vaartuigen/tram-in-cijfers/</span></span></li>
   <li><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif">Over.GVB.nl. (z.d.-b). <em>Onze bussen</em>. Geraadpleegd 18 oktober 2023, van https://over.gvb.nl/ov-in-amsterdam/voer-en-vaartuigen/bus-in-cijfers/</span></span></li>
 </ul>
