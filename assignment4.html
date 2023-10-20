@@ -143,11 +143,89 @@
     visitors that can reach the event and the capacity for festivities after the event.</p>
 
 <h4>Question 1: Find the centre of the nodes of the swimming route.</h4>
+<p>The following code calculates the centre of the nodes:</p>
+
+<pre>
+  <code class="language-python">
+    #importing packages
+    from gpx_converter import Converter
+import osmnx as ox
+import numpy as np
+import networkx as nx
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+    #loading in the route into a csv file
+
+    Converter(input_file='Paralympictestevent.gpx').gpx_to_csv(output_file='covertedgxp.csv')
+    df = pd.read_csv('covertedgxp.csv')
+    
+    ## Calculating the centre of the nodes of the swimming route (coördinates)
+    
+    X = df.latitude
+    Y = df.longitude
+    centre_point = X.mean(),Y.mean()
+    
+    # Plotting the centre of the nodes of the swimming route
+    
+    city = ox.graph_from_point(centre_point, dist=2000)
+    
+    lat,lon =  centre_point
+    fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
+    bgcolor='w',node_color='b', node_size=1)
+    plt.plot(lon,lat,c='r',marker='o',markersize = 10, label = 'centre node')
+    
+    plt.legend(loc='best')
+    plt.show()</code></pre>
+
+<p>After running this code you will recieve this plot:</p>
+<div class = "items">
+  <figure>
+  <img src=".\PNGs\as4q1.png" alt="tramline 4" width="400" height="400">
+    <figcaption> Figure 1: Image of the centre of the node </figcaption>
+  </figure>
+</div>
 
 <h4>Question 2: Use the centre to find a suitable spot for the Event Headquarters.</h4>
 <p>As the centre of our swimming route is located within the IJ-tunnel, a headquarters for the event would not be feasible in this location. The quays around the IJ-tunnel are equally not suitable for a headquarters, as they are too narrow to facilitate multiple temporary buildings. The closest larger open spaces are located on the Marineterrein. There are two options, a land-based headquarters or a headquarters on top of a floating pontoon in the Binnenhaven of the Marineterrein. The land-based headquarters would utilize the Voorwerf park and the adjacent parking lot of the Marineterrein and would have the benefit of reaching connecting roads to the start and finish quicker. However, the floating headquarters benefits from having a larger area that it could utilize to put up temporary buildings.</p>
 
 <h4>Question 3 and 4: Find the closest bus and tram stops at the start and finish of the swimming route. How many people can be transported within an hour? Can you find which bus and tram lines these are? And can you find their routes?</h4>
+<pre>
+  <code class="language-python">
+#storing coördinates start en finish point
+start_point = df.latitude[0],df.longitude[0]
+finish_point = df.latitude[62],df.longitude[62]
+
+#Finding closest busstop for start and finish
+busstop_start = ox.features.features_from_point(start_point, tags =  {'highway': 'bus_stop'}, dist = 130)
+busstop_finish = ox.features.features_from_point(finish_point, tags =  {'highway': 'bus_stop'}, dist = 150)
+
+print(busstop_start)
+print(busstop_finish)
+
+#plotting closest busstop for start and finish
+city = ox.graph_from_point(centre_point, dist=2000)
+
+start_lat,start_lon =  (52.36379,4.89826)
+finish_lat,finish_lon =  (52.37225,4.91797)
+
+fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
+bgcolor='w',node_color='b', node_size=1)
+plt.plot(start_lon,start_lat,c='r',marker='o',markersize = 10, label = 'Busstop Keizersgracht ')
+plt.plot(finish_lon,finish_lat,c='b',marker='o',markersize = 10,label = 'Busstop Kattenburgerstraat ')
+
+plt.legend(loc='best')
+plt.show()</code></pre>
+
+<p>Running this code leads to the following plot:</p>
+<div class = "items">
+  <figure>
+  <img src=".\PNGs\as4q3.png" alt="tramline 4" width="400" height="400">
+    <figcaption> Figure 2: Bus stops at the start and finish of the swimming route </figcaption>
+  </figure>
+</div>
+
 <p>The closest tram stop to the start of the route is the Keizersgracht stop of tramline 4 at only a minute walk away. Tramline 4 has an irregular schedule, but generally a tram to the central station leaves on average every 15 minutes. The trams have a capacity of between 131 and 151 places with a single carriage (over.gvb.nl/tram-in-cijfers). With a frequency of 4 per hour, the tramline can transport between 524 and 604 passengers per hour in both directions. The closest bus stop is the same stop as the closest tram stop, however the bus stop only serves nightbuses and does not have any services during the day. This is also the case for other bus stops around the area of the start.</p>
 <div class = "items">
   <figure>
@@ -164,7 +242,37 @@
 </div>
 
 <h4>Question 5: Calculate the centrality of the start, finish, and centre node of the route. Which centrality calculation makes the most sense.</h4>
+<pre>
+  <code class="language-python">
+    #storing coördinates start, centre and finish point
+    location_centre = centre_point
+    location_start = df.latitude[0], df.longitude[0]
+    location_finish = df.latitude[62], df.longitude[62]
+    
+    #Finding nearest node for start, centre and finish point
+    nodes_centre = ox.distance.nearest_nodes(city, location_centre[1], location_centre[0])
+    nodes_start = ox.distance.nearest_nodes(city, location_start[1], location_start[0])
+    nodes_finish = ox.distance.nearest_nodes(city, location_finish[1], location_finish[0])
+    
+    #Function for calculating the closeness centrality
+    def closeness_centrality (u):
+        closeness = nx.closeness_centrality(city, u = u,  wf_improved=True)
+        return closeness
+    
+    #Printing the closeness centrality for the centre, start and finish node
+    print('the closeness centrality of the centre node is', closeness_centrality(nodes_centre))
+    print('the closeness centrality of the start node is', closeness_centrality(nodes_start))
+    print('the closeness centrality of the finish node is', closeness_centrality(nodes_finish))</code></pre>
 
+<p>When running this code, you will recieve the answers:
+  <pre>
+    <code class = "language-python">
+the closeness centrality of the centre node is 0.02730357697455819
+the closeness centrality of the start node is 0.025498038590615207
+the closeness centrality of the finish node is 0.024650822273494452
+    </code>
+  </pre>
+</p>
 <h4>Question 6: Find all cafes, restaurants near the finish line. Walking time smaller than 10 minutes.</h4>
 
 <h3>References:</h3>
