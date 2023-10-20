@@ -147,34 +147,34 @@
 
 <pre>
   <code class="language-python">
-#importing packages
-from gpx_converter import Converter
-import osmnx as ox
-import numpy as np
-import networkx as nx
-import pandas as pd
-import matplotlib.pyplot as plt
-%matplotlib inline
+    #importing packages
+    from gpx_converter import Converter
+    import osmnx as ox
+    import numpy as np
+    import networkx as nx
+    import pandas as pd
+    import matplotlib.pyplot as plt
+    %matplotlib inline
 
-#loading in the route into a csv file
-Converter(input_file='Paralympictestevent.gpx').gpx_to_csv(output_file='covertedgxp.csv')
-df = pd.read_csv('covertedgxp.csv')
+    #loading in the route into a csv file
+    Converter(input_file='Paralympictestevent.gpx').gpx_to_csv(output_file='covertedgxp.csv')
+    df = pd.read_csv('covertedgxp.csv')
     
-# Calculating the centre of the nodes of the swimming route (coördinates)
-X = df.latitude
-Y = df.longitude
-centre_point = X.mean(),Y.mean()
+    # Calculating the centre of the nodes of the swimming route (coördinates)
+    X = df.latitude
+    Y = df.longitude
+    centre_point = X.mean(),Y.mean()
     
-# Plotting the centre of the nodes of the swimming route
-city = ox.graph_from_point(centre_point, dist=2000)
+    # Plotting the centre of the nodes of the swimming route
+    city = ox.graph_from_point(centre_point, dist=2000)
     
-lat,lon =  centre_point
-fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
-bgcolor='w',node_color='b', node_size=1)
-plt.plot(lon,lat,c='r',marker='o',markersize = 10, label = 'centre node')
+    lat,lon =  centre_point
+    fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
+    bgcolor='w',node_color='b', node_size=1)
+    plt.plot(lon,lat,c='r',marker='o',markersize = 10, label = 'centre node')
    
-plt.legend(loc='best')
-plt.show()</code></pre>
+    plt.legend(loc='best')
+    plt.show()</code></pre>
 
 <p>After running this code you will recieve this plot:</p>
 <div class = "items">
@@ -190,30 +190,30 @@ plt.show()</code></pre>
 <h4>Question 3 and 4: Find the closest bus and tram stops at the start and finish of the swimming route. How many people can be transported within an hour? Can you find which bus and tram lines these are? And can you find their routes?</h4>
 <pre>
   <code class="language-python">
-#storing coördinates start en finish point
-start_point = df.latitude[0],df.longitude[0]
-finish_point = df.latitude[62],df.longitude[62]
+    #storing coördinates start en finish point
+    start_point = df.latitude[0],df.longitude[0]
+    finish_point = df.latitude[62],df.longitude[62]
 
-#Finding closest busstop for start and finish
-busstop_start = ox.features.features_from_point(start_point, tags =  {'highway': 'bus_stop'}, dist = 130)
-busstop_finish = ox.features.features_from_point(finish_point, tags =  {'highway': 'bus_stop'}, dist = 150)
+    #Finding closest busstop for start and finish
+    busstop_start = ox.features.features_from_point(start_point, tags =  {'highway': 'bus_stop'}, dist = 130)
+    busstop_finish = ox.features.features_from_point(finish_point, tags =  {'highway': 'bus_stop'}, dist = 150)
 
-print(busstop_start)
-print(busstop_finish)
+    print(busstop_start)
+    print(busstop_finish)
 
-#plotting closest busstop for start and finish
-city = ox.graph_from_point(centre_point, dist=2000)
+    #plotting closest busstop for start and finish
+    city = ox.graph_from_point(centre_point, dist=2000)
 
-start_lat,start_lon =  (52.36379,4.89826)
-finish_lat,finish_lon =  (52.37225,4.91797)
+    start_lat,start_lon =  (52.36379,4.89826)
+    finish_lat,finish_lon =  (52.37225,4.91797)
 
-fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
-bgcolor='w',node_color='b', node_size=1)
-plt.plot(start_lon,start_lat,c='r',marker='o',markersize = 10, label = 'Busstop Keizersgracht ')
-plt.plot(finish_lon,finish_lat,c='b',marker='o',markersize = 10,label = 'Busstop Kattenburgerstraat ')
+    fig, ax = ox.plot_graph(city, show=False, close=False,node_alpha=.2,edge_alpha=.3, 
+    bgcolor='w',node_color='b', node_size=1)
+    plt.plot(start_lon,start_lat,c='r',marker='o',markersize = 10, label = 'Busstop Keizersgracht ')
+    plt.plot(finish_lon,finish_lat,c='b',marker='o',markersize = 10,label = 'Busstop Kattenburgerstraat ')
 
-plt.legend(loc='best')
-plt.show()</code></pre>
+    plt.legend(loc='best')
+    plt.show()</code></pre>
 
 <p>Running this code leads to the following plot:</p>
 <div class = "items">
@@ -264,9 +264,9 @@ plt.show()</code></pre>
 <p>When running this code, you will recieve the answers:
   <pre>
     <code class = "language-python">
-the closeness centrality of the centre node is 0.02730357697455819
-the closeness centrality of the start node is 0.025498038590615207
-the closeness centrality of the finish node is 0.024650822273494452
+    the closeness centrality of the centre node is 0.02730357697455819
+    the closeness centrality of the start node is 0.025498038590615207
+    the closeness centrality of the finish node is 0.024650822273494452
     </code>
   </pre>
 </p>

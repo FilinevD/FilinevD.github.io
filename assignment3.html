@@ -193,33 +193,36 @@
 <p>This question is answered using Python. The code you can find below:&nbsp;</p>
 
 <pre>
-<code class="language-python">pip install pandas
-pip install matplotlib
-import pandas as pd
-import matplotlib.pyplot as plt
+<code class="language-python">
+    #install and import packages
+    pip install pandas
+    pip install matplotlib
+    import pandas as pd
+    import matplotlib.pyplot as plt
 
-data = pd.read_csv("df_bnb.csv", encoding="utf-8", sep = ";")
-data['neighbourhood'] = data['neighbourhood'].str.strip('"')
+    #open csv file
+    data = pd.read_csv("df_bnb.csv", encoding="utf-8", sep = ";")
+    data['neighbourhood'] = data['neighbourhood'].str.strip('"')
 
-# Clean and convert the "latitude" and "longitude" columns to numeric values to plot
-data['latitude'] = data['latitude'].str.replace('.', '').astype(float) / 1000
-data['longitude'] = data['longitude'].str.replace('.', '').astype(float) / 1000
+    # Clean and convert the "latitude" and "longitude" columns to numeric values to plot
+    data['latitude'] = data['latitude'].str.replace('.', '').astype(float) / 1000
+    data['longitude'] = data['longitude'].str.replace('.', '').astype(float) / 1000
 
-# Group the data by neighborhood and count the number of Airbnb locations
-neighborhood_counts = data['neighbourhood'].value_counts().reset_index()
-neighborhood_counts.columns = ['Neighborhood', 'Counts']
+    # Group the data by neighborhood and count the number of Airbnb locations
+    neighborhood_counts = data['neighbourhood'].value_counts().reset_index()
+    neighborhood_counts.columns = ['Neighborhood', 'Counts']
 
-# Create a plot to visualize the data
-plt.figure(figsize=(12, 6))
-plt.bar(neighborhood_counts["Neighborhood"], neighborhood_counts["Counts"])
-plt.xlabel("Neighborhood")
-plt.ylabel("Number of Airbnb Locations")
-plt.title("Airbnb Locations per Neighborhood in the Netherlands")
-plt.xticks(rotation=90)
-plt.tight_layout()
-plt.show()</code></pre>
+    # Create a plot to visualize the data
+    plt.figure(figsize=(12, 6))
+    plt.bar(neighborhood_counts["Neighborhood"], neighborhood_counts["Counts"])
+    plt.xlabel("Neighborhood")
+    plt.ylabel("Number of Airbnb Locations")
+    plt.title("Airbnb Locations per Neighborhood in the Netherlands")
+    plt.xticks(rotation=90)
+    plt.tight_layout()
+    plt.show()</code></pre>
 
-<p>When plotting this code you will recieve the next plot:</p>
+    <p>When plotting this code you will recieve the next plot:</p>
 <div class = "items">
   <figure>
   <img src=".\PNGs\de baarsjes.png" alt="de baarsjes" width="800" height="600">
