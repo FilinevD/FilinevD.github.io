@@ -209,7 +209,12 @@ plt.tight_layout()
 plt.show()</code></pre>
 
 <p>When plotting this code you will recieve the next plot:</p>
-<img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\de baarsjes.png" alt="uitkomst de baarsjes" width="800" height="600">
+<div class = "items">
+  <figure>
+  <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\de baarsjes.png" alt="de baarsjes" width="800" height="600">
+    <figcaption> Figure 1: Barplot of the AirBnBs in the neighbourhoods of Amsterdam</figcaption>
+  </figure>
+</div>
 <p>Hence, the neighbourhood "De Baarsjes - Oud-West" consists of the most AirBnB locations.</p>
 <h4>Question 3: Which street in Amsterdam has the most AirBnB apartments?</h4>
 <p>This question is divided in two parts. First we located the adresses of all the ID's in the csv file of the neighbourhood "De Baarsjes - Oud-West". Then the adresses were added to the dataframe in a new column</p>
@@ -282,23 +287,34 @@ plt.show()</code></pre>
     print(f"The most common street is '{most_common_street}' with {most_common_count} occurrences.")</code></pre>
     
 <p>When running this code, you will recieve the answer with the street containing the most AirBnBs: Nassaukade. Which contains 14 AirBnBs.</p>
-<h4>Question 4: Try to cross reference the data from the AirBnB dataset with the BBGA. Can you figure
+<
+h4>Question 4: Try to cross reference the data from the AirBnB dataset with the BBGA. Can you figure
     out if all apartments of AirBnB are designated as housing? Which number of
     apartments are not rented out all the time but are also used as normal housing?</h4>
 <p>Looking at the BBGA csv and looking back at the question we have concluded that the data in the BBGA file can not be cross referenced with the AirBnB data. There is no data in common with both datasets to cross reference and answer this question.</p>
+
 <h4>Question 5: How many hotel rooms should be built if Amsterdam wants to accommodate the same
     number of tourists?</h4>
 <p>30.000 visitors are coming to Amsterdam for a week. Based off the website of the Municipali
     ty of Amsterdam there are 536 Hotels with a total of 40.583 hotel rooms (Gemeente Amsterdam, 2021). 
     Therefore, there are enough hotel rooms to accommodate the number of tourists visiting Amsterdam for the swimming event.</p>  
 
-    <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2011.png" alt="2011 hotelkamers" width="500" height="600">
-    <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2021.png" alt="2021 hotelkamers" width="500" height="600">
+    <div class = "items">
+      <figure>
+        <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2011.png" alt="2011 hotelkamers" width="500" height="600">
+        <figcaption> Figure 2: Graph of the hotelrooms in Amsterdam 2011</figcaption>
+      </figure>
+      <figure>
+        <img src="C:\Users\test\Documents\MADE\DATA 1\FilinevD.github.io-3\PNGs\2021.png" alt="2021 hotelkamers" width="500" height="600">
+        <figcaption> Figure 3: Graph of the hotelrooms in Amsterdam 2021</figcaption>
+      </figure>
+    </div>
 
     <p>The conclusion made above is based on the Municipality of Amsterdam website. Here you see a graph made 
         of the statistics. As you can see the number of hotels and hotel rooms has increased compared to 2011.
          With this information we can assume that the number of hotels and hotel rooms also increased and not decreased in the last 
          2 years. Hence, there is enough to accommodate 30.000 visitors.</p>
+
 <h4>Question 6: How many different licenses are issued?</h4>
 
 <pre>
